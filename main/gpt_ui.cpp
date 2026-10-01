@@ -1,7 +1,9 @@
 #include "gpt_ui.h"
 #include "Console_io.h"
+#include "thread.h"
 #include "vmeditor.h"
 #include "vmstdlib.h"
+#include "vmtimer.h"
 #include <string.h>
 
 static const int history_buffer_bytes = 16384;
@@ -29,6 +31,7 @@ static VMINT history_editor;
 static VMINT input_editor;
 static VMINT history_height;
 static VMINT history_length;
+static VMINT request_timer = -1;
 
 static vm_editor_font_attribute editor_font = {0, 0, 0, 16};
 
@@ -37,6 +40,12 @@ static VMUINT32 ime_callback(VMINT32 handle, vm_editor_message_struct_p message)
 	(void)handle;
 	(void)message;
 	return 0;
+}
+
+static void advance_request_thread(VMINT timer_id)
+{
+	(void)timer_id;
+	thread_next();
 }
 
 static void activate_input()
@@ -213,6 +222,8 @@ void gpt_ui_handle_sysevt(VMINT message, VMINT param)
 			}
 		}
 		vm_switch_power_saving_mode(turn_off_mode);
+		if (request_timer < 0)
+			request_timer = vm_create_timer(1000 / 15, advance_request_thread);
 		break;
 
 	case VM_MSG_PAINT:
@@ -224,6 +235,10 @@ void gpt_ui_handle_sysevt(VMINT message, VMINT param)
 
 	case VM_MSG_INACTIVE:
 		vm_switch_power_saving_mode(turn_on_mode);
+		if (request_timer >= 0) {
+			vm_delete_timer(request_timer);
+			request_timer = -1;
+		}
 		if (input_editor) {
 			vm_editor_deactivate(input_editor);
 			vm_editor_close(input_editor);
@@ -240,6 +255,10 @@ void gpt_ui_handle_sysevt(VMINT message, VMINT param)
 		break;
 
 	case VM_MSG_QUIT:
+		if (request_timer >= 0) {
+			vm_delete_timer(request_timer);
+			request_timer = -1;
+		}
 		if (input_editor) {
 			vm_editor_deactivate(input_editor);
 			vm_editor_close(input_editor);

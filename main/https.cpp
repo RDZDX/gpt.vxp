@@ -134,7 +134,6 @@ void https_request(
     char* rbody,
     int &rbody_size
 ){
-//    connected = true;
     connected = false;
     network_err = false;
 
@@ -236,45 +235,9 @@ br_x509_minimal_set_time(
 
     cprintf("\b\b\b50%%");
 
-//    skip_to(ioc, "\r\n\r\n");
+    skip_to(ioc, "\r\n\r\n");
 
-//    cprintf("\b\b\b75%%");
-
-char status_line[128];
-int status_pos = 0;
-
-while (status_pos < sizeof(status_line) - 1) {
-
-    char c;
-
-    int rlen = br_sslio_read(&ioc, &c, 1);
-
-    if (rlen <= 0)
-        break;
-
-    if (c == '\r') {
-        char next;
-        br_sslio_read(&ioc, &next, 1);
-
-        if (next == '\n')
-            break;
-
-        continue;
-    }
-
-    status_line[status_pos++] = c;
-}
-
-status_line[status_pos] = '\0';
-
-//cprintf("\nHTTP: ");
-//cprintf(status_line);
-//cprintf("%s", status_line);
-//cprintf("\n");
-
-skip_to(ioc, "\r\n\r\n");
-
-cprintf("\b\b\b75%%");
+    cprintf("\b\b\b75%%");
 
     int readed = 0;
 

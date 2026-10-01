@@ -10,13 +10,13 @@ static const int history_buffer_bytes = 16384;
 static const int input_buffer_bytes = 8192;
 static const int input_height = 64;
 
-static VMWCHAR history_buffer[history_buffer_bytes / sizeof(VMWCHAR)];
-static VMWCHAR input_buffer[input_buffer_bytes / sizeof(VMWCHAR)];
-static VMWCHAR input_text[input_buffer_bytes / sizeof(VMWCHAR)];
-static VMWCHAR input_label[16];
-static VMWCHAR history_label[16];
-static VMWCHAR send_label[16];
-static VMWCHAR clear_label[16];
+static VMUWCHAR history_buffer[history_buffer_bytes / sizeof(VMUWCHAR)];
+static VMUWCHAR input_buffer[input_buffer_bytes / sizeof(VMUWCHAR)];
+static VMUWCHAR input_text[input_buffer_bytes / sizeof(VMUWCHAR)];
+static VMUWCHAR input_label[16];
+static VMUWCHAR history_label[16];
+static VMUWCHAR send_label[16];
+static VMUWCHAR clear_label[16];
 static vm_input_mode_enum input_modes[] = {
 	VM_INPUT_MODE_MULTITAP_FIRST_UPPERCASE_ABC,
 	VM_INPUT_MODE_123,
@@ -95,7 +95,7 @@ static void clear_history()
 
 static void append_character(char value)
 {
-	int capacity = history_buffer_bytes / sizeof(VMWCHAR);
+	int capacity = history_buffer_bytes / sizeof(VMUWCHAR);
 
 	if (value == '\b') {
 		if (history_length > 0)
@@ -117,7 +117,7 @@ static void append_character(char value)
 		else
 			drop = history_length / 2;
 		memmove(history_buffer, history_buffer + drop,
-			(history_length - drop) * sizeof(VMWCHAR));
+			(history_length - drop) * sizeof(VMUWCHAR));
 		history_length -= drop;
 		history_buffer[history_length] = 0;
 	}
@@ -134,7 +134,7 @@ static void send_prompt()
 		return;
 
 	vm_editor_get_text(input_editor, input_text, sizeof(input_text));
-	vm_ucs2_to_ascii(prompt, sizeof(prompt), input_text);
+	vm_ucs2_to_ascii(prompt, sizeof(prompt), (VMWSTR)input_text);
 	if (!prompt[0])
 		return;
 
@@ -150,10 +150,10 @@ static void send_prompt()
 
 void gpt_ui_init()
 {
-	vm_ascii_to_ucs2(input_label, sizeof(input_label), (VMSTR)"Input");
-	vm_ascii_to_ucs2(history_label, sizeof(history_label), (VMSTR)"History");
-	vm_ascii_to_ucs2(send_label, sizeof(send_label), (VMSTR)"Send");
-	vm_ascii_to_ucs2(clear_label, sizeof(clear_label), (VMSTR)"Clear");
+	vm_ascii_to_ucs2((VMWSTR)input_label, sizeof(input_label), (VMSTR)"Input");
+	vm_ascii_to_ucs2((VMWSTR)history_label, sizeof(history_label), (VMSTR)"History");
+	vm_ascii_to_ucs2((VMWSTR)send_label, sizeof(send_label), (VMSTR)"Send");
+	vm_ascii_to_ucs2((VMWSTR)clear_label, sizeof(clear_label), (VMSTR)"Clear");
 }
 
 void gpt_ui_write_n(const char* text, int length)

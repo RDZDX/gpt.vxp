@@ -1,6 +1,5 @@
 #define inline  
 #include "bearssl.h"
-#include "certificates.h"
 #include "vmsys.h"
 #include "vmsock.h"
 #include "vmstdlib.h"
@@ -65,6 +64,34 @@ void tcp_callback(VMINT handle, VMINT event) {
 br_ssl_client_context sc;
 br_x509_minimal_context xc;
 unsigned char iobuf[BR_SSL_BUFSIZE_BIDI];
+
+static br_x509_class insecure_x509_vtable;
+
+static unsigned insecure_x509_end_chain(const br_x509_class **ctx);
+static const br_x509_pkey *insecure_x509_get_pkey(
+    const br_x509_class *const *ctx,
+    unsigned *usages);
+
+static unsigned insecure_x509_end_chain(const br_x509_class **ctx)
+{
+    br_x509_minimal_vtable.end_chain(ctx);
+    return 0;
+}
+
+static const br_x509_pkey *insecure_x509_get_pkey(
+    const br_x509_class *const *ctx,
+    unsigned *usages)
+{
+    const br_x509_minimal_context *minimal = (const br_x509_minimal_context *)ctx;
+
+    if (minimal->pkey.key_type != BR_KEYTYPE_RSA
+        && minimal->pkey.key_type != BR_KEYTYPE_EC)
+        return NULL;
+
+    if (usages)
+        *usages = BR_KEYTYPE_SIGN | BR_KEYTYPE_KEYX;
+    return &minimal->pkey;
+}
 
 void skip_to(br_sslio_context &ioc, const char* find_str)
 {
@@ -132,7 +159,11 @@ void https_request(
 
     cprintf("\b\b25%%");
 
-    br_ssl_client_init_full(&sc, &xc, TAs, TAs_NUM);
+    br_ssl_client_init_full(&sc, &xc, NULL, 0);
+    insecure_x509_vtable = br_x509_minimal_vtable;
+    insecure_x509_vtable.end_chain = insecure_x509_end_chain;
+    insecure_x509_vtable.get_pkey = insecure_x509_get_pkey;
+    xc.vtable = &insecure_x509_vtable;
 
 vm_get_time(&t);
 
@@ -318,4 +349,3 @@ static unsigned long bearssl_days(
 
     return d;
 }
-

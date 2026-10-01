@@ -134,6 +134,9 @@ static void send_prompt()
 		return;
 
 	vm_editor_get_text(input_editor, input_text, sizeof(input_text));
+	/* vm_ucs2_to_ascii() takes VMWSTR (signed short*) while editor buffers use
+	 * VMUWCHAR (unsigned short); both are 16-bit UCS2 code units, so the cast
+	 * only changes signedness, not representation, and is safe here. */
 	vm_ucs2_to_ascii(prompt, sizeof(prompt), (VMWSTR)input_text);
 	if (!prompt[0])
 		return;
@@ -150,6 +153,10 @@ static void send_prompt()
 
 void gpt_ui_init()
 {
+	/* vm_ascii_to_ucs2() takes VMWSTR (signed short*) while the label buffers
+	 * use VMUWCHAR (unsigned short) to match vm_editor_* APIs; both are
+	 * 16-bit UCS2 code units, so these casts only change signedness, not
+	 * representation, and are safe here. */
 	vm_ascii_to_ucs2((VMWSTR)input_label, sizeof(input_label), (VMSTR)"Input");
 	vm_ascii_to_ucs2((VMWSTR)history_label, sizeof(history_label), (VMSTR)"History");
 	vm_ascii_to_ucs2((VMWSTR)send_label, sizeof(send_label), (VMSTR)"Send");

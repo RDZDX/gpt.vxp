@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 3.8)
 
 set(TARGET_NAME "main")
 
-set(SOURCES "main.cpp" "main.h" "bearssl_impl.c" "chatgpt.h" "cJSON.h" "Console_io.cpp" "libco.cpp" "thread.cpp" "certificates.h" "CircleBuf.cpp" "Console_io.h" "libco.h" "Profont6x11.h" "thread.h" "CircleBuf.h" "Console.cpp" "T2Input.cpp" "chatgpt.cpp" "cJSON.c" "Console.h" "https.cpp" "T2Input.h")
+set(SOURCES "main.cpp" "main.h" "gpt_ui.cpp" "gpt_ui.h" "bearssl_impl.c" "chatgpt.h" "cJSON.h" "Console_io.cpp" "libco.cpp" "thread.cpp" "certificates.h" "CircleBuf.cpp" "Console_io.h" "libco.h" "thread.h" "CircleBuf.h" "chatgpt.cpp" "cJSON.c" "https.cpp")
 
 add_exec_vxp(${TARGET_NAME}
     SRCS ${SOURCES}

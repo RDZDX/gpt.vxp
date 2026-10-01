@@ -23,9 +23,7 @@ endif()
 include(cmake/MreUtils.cmake)
 
 add_subdirectory(resourses)
-#add_subdirectory(core)
 add_subdirectory(mreapi)
-#add_subdirectory(vxp)
 add_subdirectory(run)
 
 add_subdirectory(main)

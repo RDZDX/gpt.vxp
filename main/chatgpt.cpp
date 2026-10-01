@@ -1,9 +1,9 @@
-#include "Console.h"
 #include "chatgpt.h"
 #include "Console_io.h"
 #include "thread.h"
 #include "CircleBuf.h"
 #include "cJSON.h"
+#include "vmstdlib.h"
 #include <string.h>
 
 // Free ChatGPT endpoint. You can use any endpoint you want

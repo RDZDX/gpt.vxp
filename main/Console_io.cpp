@@ -1,19 +1,18 @@
 #include "Console_io.h"
 #include "CircleBuf.h"
-extern Console console;
-extern T2Input t2input;
+#include "gpt_ui.h"
 extern CircleBuf circlebuf;
 
 void console_char_in(char ch){
-	console.put_c(ch);
+	gpt_ui_write_n(&ch, 1);
 }
 
 void console_str_in(const char* str){
-	console.putstr(str);
+	gpt_ui_write(str);
 }
 
 void console_str_with_length_in(const char* str, int length){
-	console.putstr(str, length);
+	gpt_ui_write_n(str, length);
 }
 
 void console_char_out(char ch){
@@ -38,6 +37,6 @@ int cprintf(const char* format, ...) {
 	int ret = vsprintf(buf, format, aptr);
 	va_end(aptr);
 
-	console_str_in(buf);
+	gpt_ui_write(buf);
 	return ret;
 }

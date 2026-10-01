@@ -95,7 +95,7 @@ if (!cJSON_IsArray(choices)) {
 
         if (cJSON_IsString(message)) {
             cprintf("OpenAI error: ");
-            cprintf(message->valuestring);
+            cprintf("%s", message->valuestring);
             cprintf("\n");
         }
     }
@@ -157,7 +157,6 @@ char* get_promt(){
         }else{
             if (promtbuf_size < (int)sizeof(promtbuf) - 1) {
                 promtbuf[promtbuf_size++] = c;
-                console_char_in(c);
             }
         }
     }

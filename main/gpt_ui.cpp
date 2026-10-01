@@ -205,7 +205,7 @@ void gpt_ui_handle_sysevt(VMINT message, VMINT param)
 				vm_editor_set_bg_border_style(input_editor, VM_EDITOR_DOUBLE_BORDER, 0x07E0, 0x07E0);
 				vm_editor_set_multiline_text_font(input_editor, editor_font);
 				vm_editor_set_IME(input_editor, VM_INPUT_TYPE_MULTITAP_SENTENCE,
-					input_modes, VM_INPUT_MODE_123, NULL);
+					input_modes, VM_INPUT_MODE_123, ime_callback);
 				vm_editor_set_softkey(input_editor, history_label, VM_LEFT_SOFTKEY, activate_history);
 				vm_editor_set_softkey(input_editor, send_label, VM_CENTER_SOFTKEY, send_prompt);
 				vm_editor_set_softkey(input_editor, clear_label, VM_RIGHT_SOFTKEY, clear_history);

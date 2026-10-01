@@ -4,7 +4,7 @@ project ("gpt.vxp")
 
 set(APP_NAME "gpt.vxp")
 set(DEVELOPER_NAME "gvl610 & Ximik_Boda")
-set(RAM "2000") #Ram requirement (in kb)
+set(RAM "1500") #Ram requirement (in kb)
 set(IMSI "1234567890" CACHE STRING "Imsi of first SIM-card")
 set(API "TCP Sensor BitStream Contact MMS SMSMng File SysStorage SysFile") #Api for app, 
 set(APPID "-1")

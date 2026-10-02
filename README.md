@@ -2,6 +2,8 @@
 
 ![image](https://github.com/raspiduino/gpt.vxp/assets/68118236/4a1a016f-4e1f-444b-a227-58467fa9a24f)
 
+![alt text](https://rdzdx.github.io/gpt.vxp/picture.jpg)
+
 ## What is this?
 This is a ChatGPT client running on MRE platform.
 

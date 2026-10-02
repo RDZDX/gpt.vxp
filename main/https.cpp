@@ -6,7 +6,7 @@
 #include "Console_io.h"
 #include "thread.h"
 
-const char* key = "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"; //Put your GPT API key there 
+const char* key = ""; //Put your GPT API key there 
 
 vm_time_t t;
 

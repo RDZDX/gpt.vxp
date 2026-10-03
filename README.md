@@ -4,6 +4,9 @@
 
 ![alt text](https://rdzdx.github.io/gpt.vxp/picture.jpg)
 
+## File
+- [chat_gui.vxp](https://rdzdx.github.io/gpt.vxp/gpt_gui_vxp.zip) 
+
 ## What is this?
 This is a ChatGPT client running on MRE platform.
 

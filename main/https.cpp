@@ -6,7 +6,7 @@
 #include "Console_io.h"
 #include "thread.h"
 
-const char* key = "Your_API_Key";
+const char* key = ""; //Your_API_Key
 
 bool connected = false;
 bool network_err = false;

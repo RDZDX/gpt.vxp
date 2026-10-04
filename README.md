@@ -16,7 +16,7 @@ More information: https://vxpatch.luxferre.top
 This is a ChatGPT client running on MRE platform.
 
 ## What does it run on?
-[MRE platform](https://web.archive.org/web/20150922183623/http://mre.mediatek.com/), for example [Nokia S30+](https://en.wikipedia.org/wiki/Series_30%2B) phones like Nokia 225 (tested),... and may some other phones. If your (cell / feature) phone can run `.vxp` apps, it's likely to be able to run this app.
+[MRE platform](https://web.archive.org/web/20150922183623/http://mre.mediatek.com/), for example [Nokia S30+](https://en.wikipedia.org/wiki/Series_30%2B) phones like Nokia 225 (tested), and may some other phones. If your (cell / feature) phone can run `.vxp` apps, it's likely to be able to run this app.
 
 ## How does it work?
 gpt.vxp is a ChatGPT client that launches directly into an MRE editor UI for prompt entry and response history.

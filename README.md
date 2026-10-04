@@ -22,7 +22,7 @@ This is a ChatGPT client running on MRE platform.
 gpt.vxp is a ChatGPT client that launches directly into an MRE editor UI for prompt entry and response history.
 
 ## How to use?
-For using app you must initialy have ChatGPT API KEY. The **History** softkey expands the response history; choose **Back** to return to prompt entry.
+For using app you must initialy have ChatGPT API KEY. The **History** softkey expands the response history; choose **Back** to return to prompt entry. Chose **Save** to save history text to text file like "e:\1003141755.txt".
 Text entry uses the phone's MRE editor and its configured input method.
 
 ## HTTPS security
@@ -31,3 +31,4 @@ HTTPS certificate verification is disabled unconditionally. Connections remain e
 ## Author
 - [Ximik Boda](https://github.com/XimikBoda) for Terminal emulator (from TelnetVXP)
 - [gvl610](https://github.com/raspiduino) for other stuffs
+- [RDZDX](https://github.com/RDZDX) for graphic user interface adaptation

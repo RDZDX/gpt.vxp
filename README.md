@@ -5,7 +5,13 @@
 ![alt text](https://rdzdx.github.io/gpt.vxp/picture.jpg)
 
 ## File
-- [gpt_gui_vxp.zip](https://rdzdx.github.io/gpt.vxp/gpt_gui_vxp.zip) 
+- [gpt_gui_vxp.zip](https://rdzdx.github.io/gpt.vxp/gpt_gui_vxp.zip)
+
+## Nokia Phone Signing
+
+For use on Nokia mobile phones, the application must be signed using the IMSI code of your SIM card.
+
+More information: https://vxpatch.luxferre.top
 
 ## What is this?
 This is a ChatGPT client running on MRE platform.

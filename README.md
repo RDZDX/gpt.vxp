@@ -5,7 +5,7 @@
 ![alt text](https://rdzdx.github.io/gpt.vxp/picture.jpg)
 
 ## File
-- [gpt_gui_vxp.zip](https://rdzdx.github.io/gpt.vxp/gpt_gui_vxp.zip)
+- [gpt_gui_vxp.vxp](https://rdzdx.github.io/gpt.vxp/gpt_gui_vxp.vxp)
 
 ## Nokia Phone Signing
 
